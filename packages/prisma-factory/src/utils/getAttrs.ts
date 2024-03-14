@@ -3,7 +3,7 @@ import type { ObjectWithMaybeCallbacks } from '../lib/types';
 export const getAttrs = <T>(attrs: ObjectWithMaybeCallbacks<T>): T => {
   return Object.fromEntries(
     Object.entries(attrs).map(([key, value]) => {
-      if (typeof value === 'object') {
+      if (typeof value === 'object' && value !== null){
         // recursively evaluate nested objects
         return [key, getAttrs(value as ObjectWithMaybeCallbacks<T[keyof T]>)];
       }
